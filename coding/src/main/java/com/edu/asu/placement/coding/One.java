@@ -1,5 +1,6 @@
 package com.edu.asu.placement.coding;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -11,7 +12,38 @@ public class One {
 		System.out.println(isPermutation("string1", "str2ing") ? "Yes" : "No");
 		System.out.println(urlEncodeSpaces("Mr John Smith    ".toCharArray()));
 		System.out.println(stringCompression("aaaa1bcd"));
+		int[][] arr = {
+				{0,0,2,4},
+				{3,4,4,5},
+				{5,6,7,8}
+		};
+		setMatrixZero(arr);
 	} 
+
+	private static void setMatrixZero(int[][] arr) {
+		int[] rows = new int[arr.length];
+		Arrays.fill(rows, 1);
+		int[] columns = new int[arr[0].length];
+		Arrays.fill(columns, 1);
+		for (int i = 0; i < rows.length; i++) {
+			for (int j = 0; j < columns.length; j++) {
+				if (arr[i][j] == 0) {
+					rows[i] = 0;
+					columns[j] = 0;
+				}
+			}
+		}
+		
+		for (int i = 0; i < rows.length; i++) {
+			for (int j = 0; j < columns.length; j++) {
+				if (rows[i] == 0 || columns[j] == 0) {
+					arr[i][j] = 0;
+				}
+				System.out.print(arr[i][j]);
+			}
+			System.out.println("");
+		}
+	}
 
 	private static String stringCompression(String string) {
 		int counter = 1;
