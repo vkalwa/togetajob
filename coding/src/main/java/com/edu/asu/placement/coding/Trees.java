@@ -1,5 +1,10 @@
 package com.edu.asu.placement.coding;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Stack;
 
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
@@ -33,7 +38,50 @@ public class Trees {
 		printPostOrderIterative(root);
 		System.out.println("");*/
 		
-		System.out.println(checkIfBalanced(root) ? "Balanced" : "Unbalanced");
+		//System.out.println(checkIfBalanced(root) ? "Balanced" : "Unbalanced");
+		
+		//int arr[] = {1, 2, 3, 4, 5, 6, 7};
+		//printPostOrder(arrayToBalancedBinaryTree(arr));
+		List<LinkedList<TreeNode>> placeholder = new ArrayList<LinkedList<TreeNode>>();
+		binaryTreeToLinkedLists(root, 0, placeholder);
+		Iterator<LinkedList<TreeNode>> it = placeholder.iterator();
+		while (it.hasNext()) {
+			Iterator<TreeNode> nodeIt = it.next().iterator();
+			while (nodeIt.hasNext()) {
+				System.out.print(nodeIt.next().value);
+			}
+			System.out.println("");
+		}
+	}
+
+	private static void binaryTreeToLinkedLists(TreeNode root, int level, List<LinkedList<TreeNode>> placeholder) {
+		if (root == null) {
+			return;
+		}
+		if (placeholder.size() <= level ) {
+			placeholder.add(new LinkedList<TreeNode>(Arrays.asList(root)));
+		} else {
+			placeholder.get(level).add(root);
+		}
+		binaryTreeToLinkedLists(root.left, level + 1, placeholder);
+		binaryTreeToLinkedLists(root.right, level + 1, placeholder);
+		root.left = null;
+		root.right = null;
+	}
+
+	private static TreeNode arrayToBalancedBinaryTree(int[] arr) {
+		TreeNode root = null;
+		if (arr.length <= 2) {
+			root = new TreeNode(arr[arr.length - 1]);
+			if (arr.length == 2) {
+				root.left = new TreeNode(arr[0]);
+			}
+			return root;
+		}
+		root = new TreeNode(arr[arr.length/2]);
+		root.left = arrayToBalancedBinaryTree(Arrays.copyOf(arr, arr.length/2));
+		root.right = arrayToBalancedBinaryTree(Arrays.copyOfRange(arr, arr.length/2 + 1, arr.length));
+		return root;
 	}
 
 	private static boolean checkIfBalanced(TreeNode root) {
