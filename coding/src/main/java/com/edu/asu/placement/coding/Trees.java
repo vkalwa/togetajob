@@ -6,9 +6,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
-
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
-
+@SuppressWarnings("unused")
 public class Trees {
 
 	public static void main(String[] args) {

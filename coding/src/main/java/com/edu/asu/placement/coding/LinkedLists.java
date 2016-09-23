@@ -1,5 +1,5 @@
 package com.edu.asu.placement.coding;
-
+@SuppressWarnings("unused")
 public class LinkedLists {
 	
 	public static void main(String[] args) {
